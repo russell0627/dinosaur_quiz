@@ -1,18 +1,14 @@
+import 'package:dinosaur_quiz/models/dinosaur.dart';
+import 'package:dinosaur_quiz/widgets/game_finished_dialog.dart';
+import 'package:dinosaur_quiz/widgets/question_display.dart';
+import 'package:dinosaur_quiz/widgets/reset_game_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:recase/recase.dart';
-
+import '../data/dinosaurs.dart';
 import '../models/question.dart';
-import 'package:dinosaur_quiz/data/questions.dart';
-
 import '../widgets/settings_dialog.dart';
 
-Question currentQuestion = questions[0];
-Answer userAnswer = Answer.none;
-bool userAnswerCorrect = false;
-bool checkAnswerPressed = false;
-OutcomeText outcomeText = OutcomeText.selectAnAnswer;
-int score = 0;
+const imagePath = "assets/images/";
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key, required this.title});
@@ -24,11 +20,13 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  void resetGame() {
-    setState(() {
-      resetQuestions();
-      score = 0;
-    });
+  List<Question> questions = [];
+  int score = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    resetQuestions();
   }
 
   @override
@@ -43,88 +41,58 @@ class _HomePageState extends ConsumerState<HomePage> {
               showDialog(context: context, builder: (context) => const SettingsDialog());
             },
           ),
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  showResetGameDialog(context, resetQuestions);
+                });
+              },
+              icon: const Icon(Icons.refresh))
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Text("Score: $score"),
-            const SizedBox(
-              height: 8,
-            ),
-            Text("${currentQuestion.question}?"),
-            const SizedBox(
-              height: 8,
-            ),
-            TextButton(
-                onPressed: () {
-                  setState(() {
-                    userAnswer = Answer.yes;
-                  });
-                },
-                child: const Text("Yes")),
-            const SizedBox(
-              height: 8,
-            ),
-            TextButton(
-                onPressed: () {
-                  setState(() {
-                    userAnswer = Answer.no;
-                  });
-                },
-                child: const Text("No")),
-            const SizedBox(
-              height: 8,
-            ),
-            TextButton(
-                onPressed: checkAnswerPressed == false
-                    ? () {
-                        setState(
-                          () {
-                            if (userAnswer != Answer.none) {
-                              checkAnswerPressed = true;
-                            }
-                            if (userAnswer == currentQuestion.answer) {
-                              userAnswerCorrect = true;
-                              score++;
-                              outcomeText = OutcomeText.correct;
-                            } else {
-                              userAnswerCorrect = false;
-                              outcomeText = OutcomeText.incorrect;
-                            }
-                          },
-                        );
-                      }
-                    : null,
-                child: const Text("Check Answer")),
-            TextButton(
-                onPressed: checkAnswerPressed == true
-                    ? () {
-                        setState(() {
-                          checkAnswerPressed = false;
-                          outcomeText = OutcomeText.selectAnAnswer;
-                          currentQuestion = resetQuestion();
-                          userAnswer = Answer.none;
-                        });
-                      }
-                    : null,
-                child: const Text("Next Question")),
-            Text(userAnswer.name.titleCase),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(outcomeText.name.titleCase),
-            TextButton(
-                onPressed: () {
-                  showResetGameDialog(context, resetGame);
-                },
-                child: const Text("Reset Game"))
-          ],
-        ),
+      body: Column(
+        children: [
+          Text("Score: $score"),
+          QuestionDisplay(
+            question: questions.first,
+            onCorrect: () {
+              setState(() {
+                questions.remove(questions.first);
+                score++;
+                if (questions.isEmpty) {
+                  showDialog(context: context, builder: (_) => const GameFinishedDialog());
+                }
+              });
+            },
+          ),
+        ],
       ),
     );
+  }
+
+  List<Question> _generateQuestions(Dinosaur currentDinosaur) {
+    List<Question> newQuestions = [
+      Question<Diet>(
+          question: "What was the diet classification for ${currentDinosaur.name}?",
+          options: Diet.values,
+          answer: currentDinosaur.diet),
+      Question<Group>(
+          question: "What is the taxonomic group for ${currentDinosaur.name}?",
+          options: Group.values,
+          answer: currentDinosaur.group)
+    ];
+
+    return newQuestions;
+  }
+
+  void resetQuestions() {
+    setState(() {
+      for (int i = 0; i < dinosaurs.length; i++) {
+        questions.addAll(_generateQuestions(dinosaurs[i]));
+      }
+      questions.shuffle();
+      score = 0;
+    });
   }
 }
 
