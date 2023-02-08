@@ -53,14 +53,16 @@ class _HomePageState extends ConsumerState<HomePage> {
       body: Column(
         children: [
           Text("Score: $score"),
+          Image.asset(questions[0].imageFilename ?? "${imagePath}triceratops.jpg"),
           QuestionDisplay(
             question: questions.first,
             onCorrect: () {
               setState(() {
-                questions.remove(questions.first);
-                score++;
                 if (questions.isEmpty) {
                   showDialog(context: context, builder: (_) => const GameFinishedDialog());
+                } else {
+                  questions.remove(questions.first);
+                  score++;
                 }
               });
             },
@@ -73,13 +75,23 @@ class _HomePageState extends ConsumerState<HomePage> {
   List<Question> _generateQuestions(Dinosaur currentDinosaur) {
     List<Question> newQuestions = [
       Question<Diet>(
-          question: "What was the diet classification for ${currentDinosaur.name}?",
-          options: Diet.values,
-          answer: currentDinosaur.diet),
+        question: "What was the diet classification for ${currentDinosaur.name}?",
+        options: Diet.values,
+        answer: currentDinosaur.diet,
+        imageFilename: "$imagePath${currentDinosaur.imageFilename}",
+      ),
       Question<Group>(
-          question: "What is the taxonomic group for ${currentDinosaur.name}?",
-          options: Group.values,
-          answer: currentDinosaur.group)
+        question: "What is the taxonomic group for ${currentDinosaur.name}?",
+        options: Group.values,
+        answer: currentDinosaur.group,
+        imageFilename: "$imagePath${currentDinosaur.imageFilename}",
+      ),
+      Question(
+        question: "What time period was ${currentDinosaur.name} from?",
+        options: TimePeriod.values,
+        answer: currentDinosaur.timePeriod,
+        imageFilename: "$imagePath${currentDinosaur.imageFilename}",
+      )
     ];
 
     return newQuestions;

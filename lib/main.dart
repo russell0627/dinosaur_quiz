@@ -16,7 +16,7 @@ class App extends ConsumerWidget {
     final themeState = ref.watch(themeServiceProvider);
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Dinosaur Quiz',
       theme: themeState.light,
       darkTheme: themeState.dark,
       themeMode: themeState.mode,

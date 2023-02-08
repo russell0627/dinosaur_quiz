@@ -20,6 +20,7 @@ enum Group {
   ankylosaur,
   ceratopsian,
   hadrosaur,
+  ornithopod,
   pachycephalosaur,
   pterosaur,
   sauropod,
@@ -42,5 +43,8 @@ enum Diet {
 enum TimePeriod {
   jurassic,
   triassic,
-  cretaceous
+  cretaceous;
+
+  @override
+  String toString() => ReCase(name).titleCase;
 }
