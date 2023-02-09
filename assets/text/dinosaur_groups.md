@@ -1,7 +1,7 @@
 - Ankylosaurs are any creatures under the suborder Ankylosauria. They are herbivorous Cretaceous dinosaurs that had plates of armor on their backs, legs and heads. Most Ankylosaurs had one weakness which was their underbelly which wasn't armored.
 - Ceratopsians are quadrupedal herbivores of a group found in the Cretaceous period, including Triceratops. They had large beaked and horned heads and bony frills protecting the neck.
 - Ornithopods are bipedal herbivorous dinosaurs.
-- Hadrosaurs or duck-billed dinosaurs, are part of the ornithschian family hadrosauridae. Their defining feature is the flat duck-bill like appearance of the bones in their snouts.
+- Hadrosaurs or duck-billed dinosaurs, are part of the Ornithschian family hadrosauridae. Their defining feature is the flat duck-bill like appearance of the bones in their snouts.
 - Pachycephalosaurs were bipedal herbivorous dinosaurs from the late Cretaceous period. They had thick domed skulls used for ramming other dinosaurs.
 - Pterosaurs were most of the flying dinosaurs such as Pteranodon, Pterodactyl, and Quetzalcoatlus.
 - Sauropods were the large herbivores of the Jurassic and Cretaceous periods that had long necks and tails, a small head and 5 toed limbs on which they tended to walk in a digitigrade fashion.

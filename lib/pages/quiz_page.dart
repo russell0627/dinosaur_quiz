@@ -105,5 +105,6 @@ class _QuizPageState extends State<QuizPage> {
       questions.shuffle();
       score = 0;
     });
+    print(dinosaurs.length);
   }
 }
