@@ -177,8 +177,8 @@ const Dinosaur mononykus = Dinosaur(
     imageFilename: "mononykus.jpg");
 const Dinosaur pentaceratops = Dinosaur(
     name: "Pentaceratops",
-    group: Group.theropod,
-    diet: Diet.carnivore,
+    group: Group.ceratopsian,
+    diet: Diet.herbivore,
     timePeriod: TimePeriod.cretaceous,
     imageFilename: "pentaceratops.jpg");
 const pteranodon = Dinosaur(
@@ -205,8 +205,117 @@ const Dinosaur torvosaurus = Dinosaur(
     diet: Diet.carnivore,
     timePeriod: TimePeriod.jurassic,
     imageFilename: "torvosaurus.jpg");
+const Dinosaur acrocanthosaurus = Dinosaur(
+    name: "Acrocanthosaurus",
+    group: Group.theropod,
+    diet: Diet.carnivore,
+    timePeriod: TimePeriod.cretaceous,
+    imageFilename: "acrocanthosaurus.jpg");
+const Dinosaur brachiosaurus = Dinosaur(
+    name: "Brachiosaurus",
+    group: Group.sauropod,
+    diet: Diet.herbivore,
+    timePeriod: TimePeriod.jurassic,
+    imageFilename: "brachiosaurus.jpg");
+const Dinosaur ceratosaurus = Dinosaur(
+    name: "Ceratosaurus",
+    group: Group.theropod,
+    diet: Diet.carnivore,
+    timePeriod: TimePeriod.jurassic,
+    imageFilename: "ceratosaurus.jpg");
+const Dinosaur cititpati = Dinosaur(
+    name: "Citipati",
+    group: Group.theropod,
+    diet: Diet.omnivore,
+    timePeriod: TimePeriod.cretaceous,
+    imageFilename: "citipati.jpg");
+const Dinosaur coelophysis = Dinosaur(
+    name: "Coelophysis",
+    group: Group.theropod,
+    diet: Diet.carnivore,
+    timePeriod: TimePeriod.triassic,
+    imageFilename: "coelophysis.jpg");
+const Dinosaur dilophosaurus = Dinosaur(
+    name: "Dilophosaurus",
+    group: Group.theropod,
+    diet: Diet.carnivore,
+    timePeriod: TimePeriod.jurassic,
+    imageFilename: "dilophosaurus.jpg");
+const Dinosaur diplodocus = Dinosaur(
+    name: "Diplodocus",
+    group: Group.sauropod,
+    diet: Diet.herbivore,
+    timePeriod: TimePeriod.jurassic,
+    imageFilename: "diplodocus.jpg");
+const Dinosaur giganotosaurus = Dinosaur(
+    name: "Giganotosaurus",
+    group: Group.theropod,
+    diet: Diet.carnivore,
+    timePeriod: TimePeriod.cretaceous,
+    imageFilename: "giganotosaurus.jpg");
+const Dinosaur herrerasaurus = Dinosaur(
+    name: "Herrerasaurus",
+    group: Group.theropod,
+    diet: Diet.carnivore,
+    timePeriod: TimePeriod.triassic,
+    imageFilename: "herrerasaurus.jpg");
+const Dinosaur iguanodon = Dinosaur(
+    name: "Iguanodon",
+    group: Group.ornithopod,
+    diet: Diet.herbivore,
+    timePeriod: TimePeriod.cretaceous,
+    imageFilename: "iguanodon.jpg");
+const Dinosaur kentrosaurus = Dinosaur(
+    name: "Kentrosaurus",
+    group: Group.stegosaur,
+    diet: Diet.herbivore,
+    timePeriod: TimePeriod.jurassic,
+    imageFilename: "kentrosaurus.jpg");
+const Dinosaur parasaurolophus = Dinosaur(
+    name: "Parasaurolophus",
+    group: Group.hadrosaur,
+    diet: Diet.herbivore,
+    timePeriod: TimePeriod.cretaceous,
+    imageFilename: "parasaurolophus.jpg");
+const Dinosaur pachycephalosaurus = Dinosaur(
+    name: "Pachycephalosaurus",
+    group: Group.pachycephalosaur,
+    diet: Diet.herbivore,
+    timePeriod: TimePeriod.cretaceous,
+    imageFilename: "pachycephalosaurus.jpg");
+const Dinosaur plateosaurus = Dinosaur(
+    name: "Plateosaurus",
+    group: Group.plateosaurid,
+    diet: Diet.herbivore,
+    timePeriod: TimePeriod.triassic,
+    imageFilename: "plateosaurus.jpg");
+const Dinosaur protoceratops = Dinosaur(
+    name: "Protoceratops",
+    group: Group.ceratopsian,
+    diet: Diet.herbivore,
+    timePeriod: TimePeriod.cretaceous,
+    imageFilename: "protoceratops.jpg");
+const Dinosaur stegosaurus = Dinosaur(
+    name: "Stegosaurus",
+    group: Group.stegosaur,
+    diet: Diet.herbivore,
+    timePeriod: TimePeriod.jurassic,
+    imageFilename: "stegosaurus.jpg");
+const Dinosaur therizinosaurus = Dinosaur(
+    name: "Therizinosaurus",
+    group: Group.theropod,
+    diet: Diet.omnivore,
+    timePeriod: TimePeriod.cretaceous,
+    imageFilename: "therizinosaurus.jpg");
+const Dinosaur torosaurus = Dinosaur(
+    name: "Torosaurus",
+    group: Group.ceratopsian,
+    diet: Diet.herbivore,
+    timePeriod: TimePeriod.cretaceous,
+    imageFilename: "torosaurus.jpg");
 
 List<Dinosaur> dinosaurs = [
+  acrocanthosaurus,
   albertaceratops,
   allosaurus,
   amargasaurus,
@@ -214,15 +323,24 @@ List<Dinosaur> dinosaurs = [
   apatosaurus,
   archaeopteryx,
   argentinosaurus,
+  brachiosaurus,
   camarasaurus,
   camptosaurus,
   carnotaurus,
   centrosaurus,
+  ceratosaurus,
+  coelophysis,
   compsognathus,
   corythosaurus,
   deinoychus,
+  dilophosaurus,
+  diplodocus,
   europasaurus,
   gallimimus,
+  giganotosaurus,
+  herrerasaurus,
+  iguanodon,
+  kentrosaurus,
   mamenchisaurus,
   megalosaurus,
   microraptor,
@@ -230,12 +348,18 @@ List<Dinosaur> dinosaurs = [
   mononykus,
   ouranosaurus,
   oviraptor,
+  parasaurolophus,
+  pachycephalosaurus,
   pentaceratops,
   pteranodon,
+  protoceratops,
   sauruolophus,
   spinosaurus,
+  stegosaurus,
   styracosaurus,
   tarbosaurus,
+  therizinosaurus,
+  torosaurus,
   torvosaurus,
   triceratops,
   tyrannosaurus,

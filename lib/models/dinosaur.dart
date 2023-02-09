@@ -22,6 +22,7 @@ enum Group {
   hadrosaur,
   ornithopod,
   pachycephalosaur,
+  plateosaurid,
   pterosaur,
   sauropod,
   stegosaur,

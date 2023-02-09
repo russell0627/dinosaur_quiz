@@ -13,15 +13,45 @@ const primaryVariant = Colors.lightBlue;
 
 @riverpod
 class ThemeService extends _$ThemeService {
-  static const colorScheme = FlexScheme.money;
+  static const colorScheme = FlexScheme.dellGenoa;
 
   FlexSchemeData get schemeData => FlexColor.schemes[colorScheme]!;
 
   @override
   ThemeState build() {
     return ThemeState(
-      light: FlexThemeData.light(scheme: colorScheme),
-      dark: FlexThemeData.dark(scheme: colorScheme),
+      light: FlexThemeData.light(
+        scheme: colorScheme,
+        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+        blendLevel: 9,
+        subThemesData: const FlexSubThemesData(
+          blendOnLevel: 10,
+          blendOnColors: false,
+          toggleButtonsRadius: 0.0,
+          unselectedToggleIsColored: true,
+          inputDecoratorRadius: 40.0,
+          chipRadius: 1.0,
+          tooltipSchemeColor: SchemeColor.primaryContainer,
+          tooltipOpacity: 0.52,
+        ),
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      ),
+      dark: FlexThemeData.dark(
+        scheme: colorScheme,
+        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+        blendLevel: 15,
+        subThemesData: const FlexSubThemesData(
+          blendOnLevel: 20,
+          toggleButtonsRadius: 0.0,
+          unselectedToggleIsColored: true,
+          inputDecoratorRadius: 40.0,
+          chipRadius: 1.0,
+          tooltipSchemeColor: SchemeColor.primaryContainer,
+          tooltipOpacity: 0.52,
+        ),
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      ),
+
     );
   }
 
