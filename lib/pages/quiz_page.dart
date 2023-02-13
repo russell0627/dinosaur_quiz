@@ -7,7 +7,6 @@ import '../utils/screen_utils.dart';
 import '../widgets/game_finished_dialog.dart';
 import '../widgets/question_display.dart';
 import '../widgets/reset_game_dialog.dart';
-import '../widgets/settings_dialog.dart';
 import 'home.dart';
 
 class QuizPage extends StatefulWidget {
@@ -31,7 +30,10 @@ class _QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dinosaur Quiz"),
+        title: const Text(
+          "Dinosaur Quiz",
+          style: TextStyle(fontFamily: "DinoSauce"),
+        ),
         actions: [
           IconButton(
               onPressed: () {
@@ -47,10 +49,28 @@ class _QuizPageState extends State<QuizPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Score: $score"),
-            boxM,
-            Image.asset(questions.first.imageFilename ?? "${imagePath}triceratops.jpg"),
-            boxM,
+            Text(
+              "Score: $score",
+              style: const TextStyle(fontSize: 16),
+            ),
+
+            Padding(
+              padding: paddingAllL,
+              child: DecoratedBox(
+                position: DecorationPosition.foreground,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: med,
+                    color: Colors.brown[900]!,
+                  ),
+                ),
+                child: Padding(
+                  padding: paddingAllM,
+                  child: Image.asset(questions.first.imageFilename ?? "${imagePath}triceratops.jpg"),
+                ),
+              ),
+            ),
+
             Flexible(
               child: QuestionDisplay(
                 question: questions.first,

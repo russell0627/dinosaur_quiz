@@ -96,7 +96,7 @@ const Dinosaur tyrannosaurus = Dinosaur(
     group: Group.theropod,
     diet: Diet.carnivore,
     timePeriod: TimePeriod.cretaceous,
-    imageFilename: "tyrannosaurus.png");
+    imageFilename: "tyrannosaurus.jpg");
 const triceratops = Dinosaur(
     name: "Triceratops",
     group: Group.ceratopsian,

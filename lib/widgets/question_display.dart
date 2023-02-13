@@ -1,3 +1,4 @@
+import 'package:dinosaur_quiz/utils/screen_utils.dart';
 import 'package:dinosaur_quiz/widgets/incorrect_answer_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dinosaur_quiz/models/question.dart';
@@ -14,7 +15,11 @@ class QuestionDisplay extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(question.question),
+        Text(
+          question.question,
+          style: const TextStyle(fontSize: 16),
+        ),
+        boxM,
         Expanded(
           child: SingleChildScrollView(
             child: SizedBox(
