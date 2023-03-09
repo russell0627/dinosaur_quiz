@@ -1,13 +1,21 @@
 import 'package:dinosaur_quiz/utils/screen_utils.dart';
-import 'package:dinosaur_quiz/widgets/incorrect_answer_dialog.dart';
+import 'package:dinosaur_quiz/widgets/dialogs/incorrect_answer_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dinosaur_quiz/models/question.dart';
 
-class QuestionDisplay extends StatelessWidget {
-  final Question question;
-  final VoidCallback onCorrect;
 
-  const QuestionDisplay({Key? key, required this.question, required this.onCorrect}) : super(key: key);
+class QuestionDisplay extends StatefulWidget {
+  final Question question;
+  final ValueChanged<bool> onComplete;
+
+  const QuestionDisplay({Key? key, required this.question, required this.onComplete}) : super(key: key);
+
+  @override
+  State<QuestionDisplay> createState() => _QuestionDisplayState();
+}
+
+class _QuestionDisplayState extends State<QuestionDisplay> {
+  bool answeredOnFirstTry = true;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +24,7 @@ class QuestionDisplay extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          question.question,
+          widget.question.question,
           style: const TextStyle(fontSize: 16),
         ),
         boxM,
@@ -27,9 +35,10 @@ class QuestionDisplay extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  for (final option in question.options)
+                  for (final option in widget.question.options)
                     TextButton(
-                      onPressed: () => question.answer == option ? onCorrect() : _onIncorrectAnswer(context),
+                      onPressed: () =>
+                          widget.question.answer == option ? widget.onComplete(answeredOnFirstTry) : _onIncorrectAnswer(context),
                       child: Text(option.toString()),
                     ),
                 ],
@@ -43,5 +52,7 @@ class QuestionDisplay extends StatelessWidget {
 
   void _onIncorrectAnswer(BuildContext context) {
     showDialog(context: context, builder: (_) => const IncorrectAnswerDialog());
+
+    answeredOnFirstTry = false;
   }
 }

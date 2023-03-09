@@ -1,8 +1,7 @@
-import 'package:dinosaur_quiz/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../services/theme/theme_service.dart';
+import '../../services/theme/theme_service.dart';
 
 const optionTextStyle = TextStyle(fontFamily: "DinoSauce");
 
@@ -51,7 +50,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                 style: optionTextStyle,
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SimpleDialogOption(

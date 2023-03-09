@@ -1,15 +1,17 @@
-import 'package:dinosaur_quiz/pages/quiz_page.dart';
-import 'package:dinosaur_quiz/pages/types_of_dinosaurs_page.dart';
+import 'package:dinosaur_quiz/pages/quiz_length_page.dart';
+import 'package:dinosaur_quiz/pages/taxonomy_of_dinosaurs_page.dart';
 import 'package:dinosaur_quiz/utils/screen_utils.dart';
-import 'package:dinosaur_quiz/widgets/settings_dialog.dart';
+import 'package:dinosaur_quiz/widgets/logo_display.dart';
+import 'package:dinosaur_quiz/widgets/dialogs/settings_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../data/dinosaurs.dart';
+import 'credits_page.dart';
 
 const imagePath = "assets/images/";
-const buttonTextStyle = TextStyle(fontFamily:  "Merienda", fontSize: 18,);
-bool dinosauceFont = true;
+const buttonTextStyle = TextStyle(
+  fontFamily: "erasaur",
+  fontSize: 18,
+);
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key, required this.title});
@@ -25,9 +27,11 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Dinosaur Quiz",
-          style: TextStyle(fontFamily: "DinoSauce"),
+        title: const LogoDisplay(
+          imagePath: imagePath,
+          imageName: "parasaurolophus_icon.png",
+          imagePadding: 8.0,
+          fontFamily: "dinosauce",
         ),
         actions: [
           IconButton(
@@ -43,47 +47,52 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
         ],
       ),
-      body: Center(
-        child: Transform.translate(
-          offset: const Offset(0, -35),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ElevatedButton(
-                onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const QuizPage())),
-                child: const Text(
-                  "Start Dinosaur Quiz!",
-                  style: buttonTextStyle,
-                ),
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+          image: DecorationImage(image: AssetImage("${imagePath}cretaceous_landscape.png"), fit: BoxFit.cover),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 150),
+                  ElevatedButton(
+                    onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => const QuizLengthPage(
+                              minQuizLength: 10,
+                              maxQuizLength: 150,
+                            ))),
+                    child: const Text(
+                      "Start Dinosaur Quiz!",
+                      style: buttonTextStyle,
+                    ),
+                  ),
+                  boxXXL,
+                  ElevatedButton(
+                    onPressed: () =>
+                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const TypesOfDinosaursPage())),
+                    child: const Text(
+                      "Families of Dinosaurs",
+                      style: buttonTextStyle,
+                    ),
+                  ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const CreditsPage())),
+                    child: const Text(
+                      "Credits",
+                      style: buttonTextStyle,
+                    ),
+                  ),
+                ],
               ),
-              boxXXL,
-              ElevatedButton(
-                onPressed: () =>
-                    Navigator.of(context).push(MaterialPageRoute(builder: (_) => const TypesOfDinosaursPage())),
-                child: const Text(
-                  "Groups of Dinosaurs",
-                  style: buttonTextStyle,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
-
-  void dinosauceFontSetter(bool setTo) {
-    setState(() {
-      dinosauceFont = setTo;
-    });
-  }
-}
-
-List<Widget> testImages()  {
-  List<Widget> images = [];
-  for(int i = 0; i < dinosaurs.length; i++) {
-    images.add(Image.asset("$imagePath${dinosaurs[i].imageFilename}"));
-  }
-  return images;
 }
