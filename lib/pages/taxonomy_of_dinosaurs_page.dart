@@ -47,8 +47,16 @@ class _TypesOfDinosaursPageState extends State<TypesOfDinosaursPage> {
                   }
 
                   if (snapshot.hasData) {
-                    return Markdown(
-                      data: snapshot.data!,
+                    return Theme(
+                      data: Theme.of(context).copyWith(
+                        textTheme: const TextTheme(
+                          bodyLarge: TextStyle(color: Colors.white),
+                          bodyMedium: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      child: Markdown(
+                        data: snapshot.data!,
+                      ),
                     );
                   }
 

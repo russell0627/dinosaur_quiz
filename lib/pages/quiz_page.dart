@@ -10,7 +10,7 @@ import '../widgets/dialogs/question_display.dart';
 import '../widgets/dialogs/reset_game_dialog.dart';
 import 'home.dart';
 
-//165 Different Questions, 3 per Dinosaur.
+//168 Different Questions, 3 per Dinosaur.
 
 class QuizPage extends StatefulWidget {
   final int quizLength;
@@ -27,6 +27,8 @@ class _QuizPageState extends State<QuizPage> {
   int questionIndex = 0;
   bool gameEndDialogShown = false;
 
+  bool get isQuizCompleted => questionIndex >= questions.length;
+
   @override
   void initState() {
     super.initState();
@@ -40,7 +42,7 @@ class _QuizPageState extends State<QuizPage> {
         title: const LogoDisplay(
           imagePath: imagePath,
           imageName: "parasaurolophus_icon.png",
-          imagePadding: 8.0,
+          imagePadding: med,
           fontFamily: "dinosauce",
         ),
         actions: [
@@ -69,38 +71,40 @@ class _QuizPageState extends State<QuizPage> {
                 "Score: $score",
                 style: const TextStyle(fontSize: 16, fontFamily: "erasaur"),
               ),
-              Text(
-                "Question: ${questionIndex + 1}/${widget.quizLength}",
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontFamily: "Merienda",
+              if (!isQuizCompleted) ...[
+                Text(
+                  "Question: ${questionIndex + 1}/${widget.quizLength}",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontFamily: "Merienda",
+                  ),
                 ),
-              ),
-              Padding(
-                padding: paddingAllL,
-                child: DecoratedBox(
-                  position: DecorationPosition.foreground,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: med,
-                      color: const Color(0xFF452C09),
+                Padding(
+                  padding: paddingAllL,
+                  child: DecoratedBox(
+                    position: DecorationPosition.foreground,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: med,
+                        color: const Color(0xFF452C09),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: paddingAllM,
+                      child: Image.asset(questions[questionIndex].imageFilename ?? "${imagePath}triceratops.jpg"),
                     ),
                   ),
-                  child: Padding(
-                    padding: paddingAllM,
-                    child: Image.asset(questions[questionIndex].imageFilename ?? "${imagePath}triceratops.jpg"),
+                ),
+                Flexible(
+                  child: QuestionDisplay(
+                    key: ObjectKey(questions[questionIndex]),
+                    question: questions[questionIndex],
+                    onComplete: (answeredOnFirstTry) {
+                      nextQuestion(answeredOnFirstTry);
+                    },
                   ),
                 ),
-              ),
-              Flexible(
-                child: QuestionDisplay(
-                  key: ObjectKey(questions[questionIndex]),
-                  question: questions[questionIndex],
-                  onComplete: (answeredOnFirstTry) {
-                    nextQuestion(answeredOnFirstTry);
-                  },
-                ),
-              ),
+              ],
             ],
           ),
         ),
@@ -147,27 +151,27 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Future<void> nextQuestion(bool answeredOnFirstTry) async {
-    if (answeredOnFirstTry) {
-      score++;
+    setState(() {
+      if (answeredOnFirstTry) {
+        score++;
+      }
+
+      questionIndex++;
+    });
+
+    if (isQuizCompleted) {
+      await showDialog(
+        context: context,
+        builder: (_) => GameFinishedDialog(
+          score: score,
+          numberOfQuestions: widget.quizLength,
+        ),
+        barrierDismissible: false,
+      );
+
+      resetQuestions();
+
+      answeredOnFirstTry = true;
     }
-
-    questionIndex++;
-
-    if (questionIndex < questions.length) {
-      setState(() {});
-      return;
-    }
-
-    await showDialog(
-      context: context,
-      builder: (_) => GameFinishedDialog(
-        score: score,
-        numberOfQuestions: widget.quizLength,
-      ),
-      barrierDismissible: false,
-    );
-    resetQuestions();
-
-    answeredOnFirstTry = true;
   }
 }

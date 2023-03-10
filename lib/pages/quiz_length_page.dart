@@ -45,7 +45,7 @@ class _QuizLengthPageState extends State<QuizLengthPage> {
                   width: 300,
                   child: TextFormField(
                     onChanged: (value) {
-                      quizLength = int.tryParse(value)!;
+                      quizLength = int.tryParse(value) ?? 0;
                     },
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: const InputDecoration(

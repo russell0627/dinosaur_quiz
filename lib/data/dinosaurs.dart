@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dinosaur_quiz/models/dinosaur.dart';
-// There are 55 dinosaurs
+// There are 56 dinosaurs
 
 const Map<String, Dinosaur> dinosaurs = {
   "Ankylosaurus": Dinosaur(
@@ -332,7 +332,8 @@ const Map<String, Dinosaur> dinosaurs = {
       group: Group.ceratopsian,
       diet: Diet.herbivore,
       timePeriod: TimePeriod.cretaceous,
-      imageFilename: "chasmosaurus.jpg")
+      imageFilename: "chasmosaurus.jpg"),
+  "Bagaceratops" : Dinosaur(name: "Bagaceratops", group: Group.ceratopsian, diet: Diet.herbivore, timePeriod: TimePeriod.cretaceous, imageFilename: "bagaceratops.jfif")
 };
 
 const Image velociraptorAndUtahraptor =

@@ -5,11 +5,9 @@ class InvalidQuizLengthDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        Text("You have chosen an invalid quiz length!"),
-        Text("Please try again."),
-      ],
-    );
+    return const SimpleDialog(children: [
+      Text("You have chosen an invalid quiz length!"),
+      Text("Please try again."),
+    ]);
   }
 }

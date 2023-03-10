@@ -2,7 +2,6 @@ import 'package:dinosaur_quiz/services/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'data/dinosaurs.dart';
 import 'pages/home.dart';
 
 void main() {

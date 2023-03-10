@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-const TextStyle _textStyle = TextStyle(
-  fontFamily: "erasaur"
-);
+const TextStyle _textStyle = TextStyle(fontFamily: "erasaur");
 
 class GameFinishedDialog extends StatelessWidget {
   final int score;
@@ -18,13 +16,13 @@ class GameFinishedDialog extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text("You Finished The Game!"),
-              Text("You got $score out of $numberOfQuestions correct!"),
+              const Text("You Finished The Game!", style: _textStyle),
+              Text("You got $score out of $numberOfQuestions correct!", style: _textStyle),
               TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text("Reset Game"))
+                  child: const Text("Reset Game", style: _textStyle,))
             ],
           ),
         ),

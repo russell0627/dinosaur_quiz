@@ -1,3 +1,4 @@
+import 'package:dinosaur_quiz/pages/find_a_dinosaur.dart';
 import 'package:dinosaur_quiz/pages/quiz_length_page.dart';
 import 'package:dinosaur_quiz/pages/taxonomy_of_dinosaurs_page.dart';
 import 'package:dinosaur_quiz/utils/screen_utils.dart';
@@ -76,6 +77,15 @@ class _HomePageState extends ConsumerState<HomePage> {
                         Navigator.of(context).push(MaterialPageRoute(builder: (_) => const TypesOfDinosaursPage())),
                     child: const Text(
                       "Families of Dinosaurs",
+                      style: buttonTextStyle,
+                    ),
+                  ),
+                  boxXXL,
+                  ElevatedButton(
+                    onPressed: () =>
+                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const FindDinosaurPage())),
+                    child: const Text(
+                      "Find a Dinosaur",
                       style: buttonTextStyle,
                     ),
                   ),
