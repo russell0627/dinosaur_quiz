@@ -29,7 +29,7 @@ class _DinosaurDisplayPageState extends State<DinosaurDisplayPage> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("${imagePath}tyrannosaurus_fight.png"),
+            image: AssetImage("${dinosaurImagePath}tyrannosaurus_fight.png"),
             fit: BoxFit.cover,
           ),
         ),

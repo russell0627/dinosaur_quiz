@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'dinosaur.dart';
+import 'space_object.dart';
 
 class Question<T> {
   final String question;
@@ -18,9 +17,13 @@ class Question<T> {
   bool get hasImage => imageFilename != null;
 }
 
+enum QuestionType {
+  dinosaur,
+  space
+}
+
 const q = Question(
   question: "The diet classification for a triceratops is:",
   options: Diet.values,
   answer: Diet.herbivore,
 );
-

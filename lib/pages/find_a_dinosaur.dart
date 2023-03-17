@@ -31,7 +31,7 @@ class _FindDinosaurPageState extends State<FindDinosaurPage> {
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-          image: AssetImage("${imagePath}tyrannosaurus_on_peak.png"),
+          image: AssetImage("${dinosaurImagePath}tyrannosaurus_on_peak.png"),
           fit: BoxFit.cover,
         )),
         child: Center(

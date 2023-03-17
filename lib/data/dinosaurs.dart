@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dinosaur_quiz/models/dinosaur.dart';
+import '../models/dinosaur.dart';
 // There are 56 dinosaurs
 
 const Map<String, Dinosaur> dinosaurs = {

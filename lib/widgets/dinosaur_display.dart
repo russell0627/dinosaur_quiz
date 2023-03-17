@@ -29,7 +29,7 @@ class DinosaurDisplay extends StatelessWidget {
             ),
             child: Padding(
               padding: paddingAllM,
-              child: Image.asset("$imagePath${dinosaur.imageFilename}"),
+              child: Image.asset("$dinosaurImagePath${dinosaur.imageFilename}"),
             ),
           ),
         ),
