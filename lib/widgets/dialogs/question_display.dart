@@ -1,8 +1,8 @@
-import 'package:dinosaur_quiz/utils/screen_utils.dart';
-import 'package:dinosaur_quiz/widgets/dialogs/incorrect_answer_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:dinosaur_quiz/models/question.dart';
 
+import '../../models/question.dart';
+import '../../utils/screen_utils.dart';
+import 'incorrect_answer_dialog.dart';
 
 class QuestionDisplay extends StatefulWidget {
   final Question question;
@@ -37,8 +37,11 @@ class _QuestionDisplayState extends State<QuestionDisplay> {
                 children: [
                   for (final option in widget.question.options)
                     TextButton(
-                      onPressed: () =>
-                          widget.question.answer == option ? widget.onComplete(answeredOnFirstTry) : _onIncorrectAnswer(context),
+                      onPressed: () {
+                        for(int i = 0; i < widget.question.answers.length; i++) {
+                          widget.question.answers[i] == option ? widget.onComplete(answeredOnFirstTry) : _onIncorrectAnswer(context);
+                      }
+                      },
                       child: Text(option.toString()),
                     ),
                 ],

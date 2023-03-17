@@ -1,12 +1,11 @@
-import 'package:dinosaur_quiz/pages/quiz_length_page.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/screen_utils.dart';
 import '../widgets/dialogs/settings_dialog.dart';
 import '../widgets/logo_display.dart';
-import 'credits_page.dart';
 import 'find_a_dinosaur.dart';
 import 'home.dart';
+import 'quiz_length_page.dart';
 import 'taxonomy_of_dinosaurs_page.dart';
 
 const dinosaurButtonTextStyle = TextStyle(
@@ -31,7 +30,7 @@ class _DinosaurHomePageState extends State<DinosaurHomePage> {
           imagePath: dinosaurImagePath,
           imageName: "parasaurolophus_icon.png",
           imagePadding: 8.0,
-          fontFamily: "dinosauce",
+          fontFamily: "dinosauce", text: ["Dinosaur", "Quiz"],
         ),
         actions: [
           IconButton(

@@ -1,11 +1,11 @@
-import 'package:dinosaur_quiz/models/dinosaur.dart';
-import 'package:dinosaur_quiz/pages/dinosaur_display_page.dart';
-import 'package:dinosaur_quiz/pages/home.dart';
-import 'package:dinosaur_quiz/utils/screen_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:recase/recase.dart';
 
 import '../data/dinosaurs.dart';
+import '../models/dinosaur.dart';
+import '../utils/screen_utils.dart';
+import 'dinosaur_display_page.dart';
+import 'home.dart';
 
 class FindDinosaurPage extends StatefulWidget {
   const FindDinosaurPage({Key? key}) : super(key: key);

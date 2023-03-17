@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'credits_page.dart';
 import 'quiz_length_page.dart';
 
+//TODO: Create plant quiz and finish animal quiz.
+
 const dinosaurImagePath = "assets/images/dinosaurs/";
 const spaceImagePath = "assets/images/space";
 
@@ -41,7 +43,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                     MaterialPageRoute(builder: (_) => const QuizLengthPage(maxQuizLength: 5, minQuizLength: 5)));
               },
               child: const Text("Go To Space Quiz", style: TextStyle(
-                fontFamily: "Andromeda"
+                fontFamily: "Andromeda",
+                fontSize: 16,
               ),),
             ),
             const Spacer(),

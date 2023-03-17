@@ -1,9 +1,9 @@
-import 'package:dinosaur_quiz/pages/home.dart';
-import 'package:dinosaur_quiz/utils/screen_utils.dart';
-import 'package:dinosaur_quiz/widgets/dinosaur_display.dart';
 import 'package:flutter/material.dart';
 
 import '../models/dinosaur.dart';
+import '../utils/screen_utils.dart';
+import '../widgets/dinosaur_display.dart';
+import 'home.dart';
 
 class DinosaurDisplayPage extends StatefulWidget {
   final Dinosaur dinosaur;

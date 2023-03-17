@@ -5,14 +5,14 @@ class Dinosaur {
   final Group group;
   final Diet diet;
   final TimePeriod timePeriod;
-  final String imageFilename;
+  final String imageFileName;
 
   const Dinosaur({
     required this.name,
     required this.group,
     required this.diet,
     required this.timePeriod,
-    required this.imageFilename,
+    required this.imageFileName,
   });
 }
 

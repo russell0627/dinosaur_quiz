@@ -1,8 +1,8 @@
-import 'package:dinosaur_quiz/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:recase/recase.dart';
 
 import '../models/dinosaur.dart';
+import '../pages/home.dart';
 import '../utils/screen_utils.dart';
 
 const TextStyle _defaultTextStyle = TextStyle();
@@ -29,7 +29,7 @@ class DinosaurDisplay extends StatelessWidget {
             ),
             child: Padding(
               padding: paddingAllM,
-              child: Image.asset("$dinosaurImagePath${dinosaur.imageFilename}"),
+              child: Image.asset("$dinosaurImagePath${dinosaur.imageFileName}"),
             ),
           ),
         ),

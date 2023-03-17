@@ -1,8 +1,7 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/screen_utils.dart';
-import '../widgets/logo_display.dart';
+import '../widgets/link_button.dart';
 import 'home.dart';
 
 class CreditsPage extends StatelessWidget {
@@ -12,13 +11,10 @@ class CreditsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const LogoDisplay(
-          imagePath: dinosaurImagePath,
-          imageName: "parasaurolophus_icon.png",
-          imagePadding: 8.0,
-          fontFamily: "dinosauce",
-        ),
-      ),
+          title: const Text(
+        "Credits Page",
+        style: TextStyle(fontFamily: "Merienda"),
+      )),
       body: DecoratedBox(
         decoration: const BoxDecoration(
             image: DecorationImage(
@@ -26,17 +22,17 @@ class CreditsPage extends StatelessWidget {
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+            children: const [
               boxXL,
-              const Text(
+              Text(
                 "Developed by DinoSquad",
                 style: TextStyle(
-                  fontFamily: "Merienda",
+                  fontFamily: "erasaur",
                   fontSize: 18,
                 ),
               ),
               boxXL,
-              const Text(
+              Text(
                 "Dinosaur and Space Icons by Freepik, Published on flaticon.com",
                 style: TextStyle(
                   fontFamily: "Merienda",
@@ -44,32 +40,18 @@ class CreditsPage extends StatelessWidget {
                 ),
               ),
               boxXL,
-              ElevatedButton(
-                onPressed: () {
-                  FlutterClipboard.copy('https://www.flaticon.com/search?author_id=1&style_id=1289&type=standard&word=dinosaur');
-                },
-                child: const Text(
-                  "Copy Link To Dinosaur Icon Source",
-                  style: TextStyle(
-                    fontFamily: "Merienda",
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  FlutterClipboard.copy('https://www.flaticon.com/free-icon/galaxy_3919942?term=space&page=1&position=19&origin=style&related_id=3919942');
-                },
-                child: const Text(
-                  "Copy Link To Galaxy Icon Source",
-                  style: TextStyle(
-                    fontFamily: "Merienda",
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-              const Text("All background images done by DALL-E"),
-              const Text("Fonts: DinoSauce (dinosaur title), Induction (space Title),Erasaur (button Labels and score), Merienda(Other)")
+              LinkButton(
+                  label: "Dinosaur Quiz Title Icon Source",
+                  url:
+                      "https://www.flaticon.com/free-icon/parasaurolophus_5475067?term=dinosaur%27&page=1&position=14&origin=style&related_id=5475067"),
+              boxXXL,
+              LinkButton(
+                  label: "Space Quiz Title Icon Source",
+                  url:
+                      'https://www.flaticon.com/free-icon/galaxy_3919942?term=space&page=1&position=19&origin=style&related_id=3919942'),
+              Text("All background images done by DALL-E"),
+              Text(
+                  "Fonts: DinoSauce (Dinosaur Quiz Title), Induction (Space Quiz Title),Erasaur (Button Labels and Score Display), Merienda(Other)")
             ],
           ),
         ),

@@ -1,6 +1,7 @@
-import 'package:dinosaur_quiz/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+
+import 'home.dart';
 
 class TypesOfDinosaursPage extends StatefulWidget {
   const TypesOfDinosaursPage({Key? key}) : super(key: key);

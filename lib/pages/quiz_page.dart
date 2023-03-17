@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../data/animals.dart';
 import '../data/dinosaurs.dart';
+import '../models/animal.dart';
 import '../models/dinosaur.dart';
+import '../models/plant.dart';
 import '../models/question.dart';
 import '../models/space_object.dart';
 import '../utils/screen_utils.dart';
@@ -50,6 +53,7 @@ class _QuizPageState extends State<QuizPage> {
           imageName: widget.questionType == QuestionType.dinosaur ? "parasaurolophus_icon.png" : "galaxy_icon.png",
           imagePadding: med,
           fontFamily: widget.questionType == QuestionType.dinosaur ? "dinosauce" : "Induction",
+          text: widget.questionType == QuestionType.dinosaur ? ["Dinosaur", "Quiz"] : ["Space", "Quiz"],
         ),
         actions: [
           IconButton(
@@ -119,65 +123,88 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 
-  List<Question> _generateQuestions({Dinosaur? currentDinosaur, required QuestionType questionType}) {
-    //TODO: make it so that this supports space questions too
+  List<Question> _generateQuestions(
+      {Dinosaur? currentDinosaur, Animal? currentAnimal, Plant? currentPlant, required QuestionType questionType}) {
+    //TODO: make it so that this supports plant questions too
     List<Question> newQuestions = [];
 
     if (questionType == QuestionType.dinosaur) {
       newQuestions = [
         const Question(
-            question: "Was Albertaceratops found in:",
-            options: ["Alberta, Canada", "Egypt", "India"],
-            answer: "Alberta, Canada"),
+          question: "Was Albertaceratops found in:",
+          options: ["Alberta, Canada", "Egypt", "India"],
+          answers: ["Alberta, Canada"],
+          imageFilename: "${dinosaurImagePath}albertaceratops.jpg",
+        ),
         Question<Diet>(
           question: "What was the diet classification for ${currentDinosaur!.name}?",
           options: Diet.values,
-          answer: currentDinosaur.diet,
-          imageFilename: "$dinosaurImagePath${currentDinosaur.imageFilename}",
+          answers: [currentDinosaur.diet],
+          imageFilename: "$dinosaurImagePath${currentDinosaur.imageFileName}",
         ),
         Question<Group>(
           question: "What is the taxonomic family for ${currentDinosaur.name}?",
           options: Group.values,
-          answer: currentDinosaur.group,
-          imageFilename: "$dinosaurImagePath${currentDinosaur.imageFilename}",
+          answers: [currentDinosaur.group],
+          imageFilename: "$dinosaurImagePath${currentDinosaur.imageFileName}",
         ),
-        Question(
+        Question<TimePeriod>(
           question: "What time period was ${currentDinosaur.name} from?",
           options: TimePeriod.values,
-          answer: currentDinosaur.timePeriod,
-          imageFilename: "$dinosaurImagePath${currentDinosaur.imageFilename}",
-        )
+          answers: [currentDinosaur.timePeriod],
+          imageFilename: "$dinosaurImagePath${currentDinosaur.imageFileName}",
+        ),
       ];
-    } else {
+    } else if (questionType == QuestionType.space) {
       newQuestions = [
         const Question(
           question: "What is the hottest type of star?",
           options: StarColor.values,
-          answer: StarColor.blue,
+          answers: [StarColor.blue],
         ),
         const Question(
           question: "What is the coldest type of star?",
           options: StarColor.values,
-          answer: StarColor.red,
+          answers: [StarColor.red],
         ),
         const Question(
             question: "What type of galaxy is the Milky Way?",
             options: GalaxyType.values,
-            answer: GalaxyType.spiral,
+            answers: [GalaxyType.spiral],
             imageFilename: "milky_way.png"),
-        Question(question: "How far is the Sun from Earth?", options: auFormatter([1, 10, 15, 100]), answer: "1 AU"),
+        Question(question: "How far is the Sun from Earth?", options: auFormatter([1, 10, 15, 100]), answers: ["1 AU"]),
         const Question(
             question: "What is the biggest dwarf planet in the solar system?",
             options: ["Eris", "MakeMake", "Pluto"],
-            answer: "Eris"),
+            answers: ["Eris"]),
+        Question(question: "How many miles are in 1 AU", options: [
+          86000000,
+          113000000,
+          auToMiles(1),
+        ], answers: [
+          auToMiles(1)
+        ])
+      ];
+    } else if (questionType == QuestionType.animal) {
+      newQuestions = [
+        Question<Diet>(
+          question: "What is the diet classification for ${currentAnimal!.name}?",
+          options: Diet.values,
+          answers: [currentAnimal.diet],
+          imageFilename: "$dinosaurImagePath${currentAnimal.imageFileName}",
+        ),
+        Question<AnimalCategory>(
+          question: "What is the category of animal for ${currentAnimal.name}?",
+          options: AnimalCategory.values,
+          answers: [currentAnimal.category],
+          imageFilename: "$dinosaurImagePath${currentAnimal.imageFileName}",
+        ),
         Question(
-            question: "How many miles are in 1 AU",
-            options: [
-              86000000,
-              113000000,
-              auToMiles(1),
-            ],
-            answer: auToMiles(1))
+          question: "Where does ${currentAnimal.name} live?",
+          options: AnimalHabitat.values,
+          answers: currentAnimal.habitats,
+          imageFilename: "$dinosaurImagePath${currentAnimal.imageFileName}",
+        )
       ];
     }
     return newQuestions;
@@ -187,14 +214,30 @@ class _QuizPageState extends State<QuizPage> {
     final List<Question> newQuestions = [];
     questionIndex = 0;
 
-    for (int i = 0; i < dinosaurs.values.length; i++) {
-      newQuestions.addAll(
-          _generateQuestions(currentDinosaur: dinosaurs.values.toList()[i], questionType: QuestionType.dinosaur));
+    switch (widget.questionType) {
+      case QuestionType.dinosaur:
+        for (int i = 0; i < dinosaurs.values.length; i++) {
+          newQuestions.addAll(
+              _generateQuestions(currentDinosaur: dinosaurs.values.toList()[i], questionType: QuestionType.dinosaur));
+        }
+        newQuestions.shuffle();
+        score = 0;
+        questions = newQuestions.take(widget.quizLength).toList();
+        setState(() {});
+        break;
+      case QuestionType.space:
+        newQuestions.addAll(_generateQuestions(questionType: QuestionType.space));
+        break;
+      case QuestionType.animal:
+        for (int i = 0; i < animals.values.length; i++) {
+          newQuestions.addAll(
+              _generateQuestions(currentAnimal: animals.values.toList()[i], questionType: QuestionType.dinosaur));
+        }
+        break;
+      case QuestionType.plant:
+        ;
+        break;
     }
-    newQuestions.shuffle();
-    score = 0;
-    questions = newQuestions.take(widget.quizLength).toList();
-    setState(() {});
   }
 
   Future<void> nextQuestion(bool answeredOnFirstTry) async {
