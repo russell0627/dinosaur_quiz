@@ -32,6 +32,10 @@ enum AnimalHabitat {
   river,
   ocean,
   swamp,
+  tundra,
+  cave,
+  undergroundWater,
+  humanHouse,
 }
 
 enum WaterType {

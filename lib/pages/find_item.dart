@@ -2,36 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:recase/recase.dart';
 
 import '../data/dinosaurs.dart';
-import '../models/dinosaur.dart';
+import '../models/question.dart';
 import '../utils/screen_utils.dart';
-import 'dinosaur_display_page.dart';
+import 'dinosaur/dinosaur_display_page.dart';
 import 'home.dart';
 
-class FindDinosaurPage extends StatefulWidget {
-  const FindDinosaurPage({Key? key}) : super(key: key);
+class FindItemPage extends StatefulWidget {
+  final QuestionType itemType;
+
+  const FindItemPage({super.key, required this.itemType});
 
   @override
-  State<FindDinosaurPage> createState() => _FindDinosaurPageState();
+  State<FindItemPage> createState() => _FindItemPageState();
 }
 
-class _FindDinosaurPageState extends State<FindDinosaurPage> {
+class _FindItemPageState extends State<FindItemPage> {
   String nameInput = "";
-  late Dinosaur dinosaur;
-  bool dinosaurFound = false;
+  late dynamic item;
+  bool itemFound = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Find A Dinosaur",
-          style: TextStyle(fontFamily: "erasaur"),
+          "Find An Object",
+          style: TextStyle(fontFamily: "Merienda"),
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             image: DecorationImage(
-          image: AssetImage("${dinosaurImagePath}tyrannosaurus_on_peak.png"),
+          image: AssetImage(findBackgroundImage(widget.itemType)),
           fit: BoxFit.cover,
         )),
         child: Center(
@@ -42,11 +44,11 @@ class _FindDinosaurPageState extends State<FindDinosaurPage> {
                 width: 400,
                 child: TextFormField(
                   decoration: const InputDecoration(
-                    labelText: "Dinosaur Name",
+                    labelText: "Item Name",
                   ),
                   onChanged: (value) {
                     setState(() {
-                      nameInput = value.titleCase;
+                      nameInput = value.toLowerCase();
                     });
                   },
                 ),
@@ -55,8 +57,10 @@ class _FindDinosaurPageState extends State<FindDinosaurPage> {
               OutlinedButton(
                 onPressed: dinosaurs[nameInput] != null
                     ? () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (_) => DinosaurDisplayPage(dinosaur: dinosaurs[nameInput]!,)));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => DinosaurDisplayPage(
+                                  dinosaur: dinosaurs[nameInput]!,
+                                )));
                       }
                     : null,
                 child: const Text("Search for Dinosaur"),
@@ -66,5 +70,18 @@ class _FindDinosaurPageState extends State<FindDinosaurPage> {
         ),
       ),
     );
+  }
+}
+
+String findBackgroundImage(QuestionType questionType) {
+  switch (questionType) {
+    case QuestionType.dinosaur:
+      return "${dinosaurImagePath}tyrannosaurus_on_peak.png";
+    case QuestionType.space:
+      return "";
+    case QuestionType.animal:
+      return "";
+    case QuestionType.plant:
+      return "";
   }
 }

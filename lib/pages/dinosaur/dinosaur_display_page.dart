@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../models/dinosaur.dart';
-import '../utils/screen_utils.dart';
-import '../widgets/dinosaur_display.dart';
-import 'home.dart';
+import '../../models/dinosaur.dart';
+import '../../utils/screen_utils.dart';
+import '../../widgets/dinosaur_display.dart';
+import '../home.dart';
 
 class DinosaurDisplayPage extends StatefulWidget {
   final Dinosaur dinosaur;
 
-  const DinosaurDisplayPage({Key? key, required this.dinosaur}) : super(key: key);
+  const DinosaurDisplayPage({super.key, required this.dinosaur});
 
   @override
   State<DinosaurDisplayPage> createState() => _DinosaurDisplayPageState();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
-import 'home.dart';
+import '../home.dart';
 
 class TypesOfDinosaursPage extends StatefulWidget {
   const TypesOfDinosaursPage({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class _TypesOfDinosaursPageState extends State<TypesOfDinosaursPage> {
   void initState() {
     super.initState();
 
-    textFuture = DefaultAssetBundle.of(context).loadString('assets/text/dinosaur_groups.md');
+    textFuture = DefaultAssetBundle.of(context).loadString('assets/text/dinosaur_taxonomy.md');
   }
 
   @override
@@ -25,7 +25,7 @@ class _TypesOfDinosaursPageState extends State<TypesOfDinosaursPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Families of Dinosaurs",
+          "Lowest Clades of Dinosaurs",
           style: TextStyle(
             fontFamily: "erasaur",
           ),

@@ -6,4 +6,5 @@ const Map<String, Animal> animals = {
   "anaconda" : Animal(name: "Anaconda", category: AnimalCategory.reptile, diet: Diet.carnivore, habitats: [AnimalHabitat.jungle]),
   "alpaca" : Animal(name: "Alpaca", category: AnimalCategory.mammal, diet: Diet.herbivore, habitats: [AnimalHabitat.mountains,]),
   "crocodile" : Animal(name: "Crocodile", category: AnimalCategory.reptile, diet: Diet.carnivore, habitats: [AnimalHabitat.swamp, AnimalHabitat.marsh, AnimalHabitat.lake]),
+  "house cat" : Animal(name: "House cat", category: AnimalCategory.mammal, diet: Diet.carnivore, habitats: [AnimalHabitat.humanHouse]),
 };

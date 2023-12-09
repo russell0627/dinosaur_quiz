@@ -15,7 +15,7 @@ class LogoDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text("Dinosaur", style: TextStyle(
+        Text(text[0], style: TextStyle(
           fontFamily: fontFamily,
         ),),
         Padding(
@@ -24,7 +24,7 @@ class LogoDisplay extends StatelessWidget {
             backgroundImage: AssetImage("$imagePath$imageName"),
           ),
         ),
-        Text("Quiz", style: TextStyle(fontFamily: fontFamily))
+        Text(text[1], style: TextStyle(fontFamily: fontFamily))
       ],
     );
   }

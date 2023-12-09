@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../utils/screen_utils.dart';
-import '../widgets/dialogs/settings_dialog.dart';
-import '../widgets/logo_display.dart';
-import 'find_a_dinosaur.dart';
-import 'home.dart';
-import 'quiz_length_page.dart';
+import '../../models/question.dart';
+import '../../utils/screen_utils.dart';
+import '../../widgets/dialogs/settings_dialog.dart';
+import '../../widgets/logo_display.dart';
+import '../find_item.dart';
+import '../home.dart';
+import '../quiz_length_page.dart';
 import 'taxonomy_of_dinosaurs_page.dart';
 
 const dinosaurButtonTextStyle = TextStyle(
@@ -74,14 +75,14 @@ class _DinosaurHomePageState extends State<DinosaurHomePage> {
                     onPressed: () =>
                         Navigator.of(context).push(MaterialPageRoute(builder: (_) => const TypesOfDinosaursPage())),
                     child: const Text(
-                      "Families of Dinosaurs",
+                      "Taxonomy of Dinosaurs",
                       style: dinosaurButtonTextStyle,
                     ),
                   ),
                   boxXXL,
                   ElevatedButton(
                     onPressed: () =>
-                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const FindDinosaurPage())),
+                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const FindItemPage(itemType: QuestionType.dinosaur,))),
                     child: const Text(
                       "Find a Dinosaur",
                       style: dinosaurButtonTextStyle,

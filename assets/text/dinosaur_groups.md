@@ -1,9 +1,0 @@
-- Ankylosaurs are any creatures under the suborder Ankylosauria. They are herbivorous Cretaceous dinosaurs that had plates of armor on their backs, legs and heads. Most Ankylosaurs had one weakness which was their underbelly which wasn't armored.
-- Ceratopsians are quadrupedal herbivores of a group found in the Cretaceous period, including Triceratops. They had large beaked and horned heads and bony frills protecting the neck.
-- Ornithopods are bipedal herbivorous dinosaurs.
-- Hadrosaurs or duck-billed dinosaurs, are part of the Ornithschian family hadrosauridae. Their defining feature is the flat duck-bill like appearance of the bones in their snouts.
-- Pachycephalosaurs were bipedal herbivorous dinosaurs from the late Cretaceous period. They had thick domed skulls used for ramming other dinosaurs.
-- Pterosaurs were most of the flying archosaurs such as Pteranodon, Pterodactyl, and Quetzalcoatlus. Technically Pterosaurs are not dinosaurs, they are Archosaurs (They are part of Archosauria) because they are not a part of Dinosauria.
-- Sauropods were the large herbivores of the Jurassic and Cretaceous periods that had long necks and tails, a small head and 5 toed limbs on which they tended to walk in a digitigrade fashion.
-- Stegosaurs were small headed quadrupedal herbivorous dinosaurs of the Jurassic and early Cretaceous periods with a double row of large bony plates or sines along the back. The name Stegosaurus means roof-lizard.
-- Theropod means "Beast Footed". All theropods were characterized by 3 toes and claws on each limb like the Tyrannosaurus, Spinosaurus, and Therizinosaurus.

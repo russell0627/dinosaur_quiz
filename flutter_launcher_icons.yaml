@@ -1,7 +1,7 @@
-flutter_icons:
+ flutter_icons:
   android: false
   ios: false
-#  image_path: "assets/icon/icon.png"
+#  image_path: "assets/images/quizzez_icon.png "
 #  min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
@@ -10,8 +10,8 @@ flutter_icons:
 #    theme_color: "#hexcode"
   windows:
     generate: true
-    image_path: "assets/images/parasaurolophus_icon.png"
+    image_path: "assets/images/quizzez_icon.png"
     icon_size: 70 # min:48, max:256, default: 48
   macos:
     generate: false
-    image_path: "assets/images/parasaurolophus_icon.png"
+    image_path: "assets/images/quizzez_icon.png"

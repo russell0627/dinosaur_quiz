@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../models/question.dart';
-import '../../utils/screen_utils.dart';
-import 'incorrect_answer_dialog.dart';
+import '../models/question.dart';
+import '../utils/screen_utils.dart';
+import 'dialogs/incorrect_answer_dialog.dart';
 
 class QuestionDisplay extends StatefulWidget {
   final Question question;

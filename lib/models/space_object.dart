@@ -1,3 +1,7 @@
+//TODO: Add JWST questions.
+
+import 'package:recase/recase.dart';
+
 class CelestialObject {
   final String name;
   final int? auFromEarth;
@@ -61,13 +65,20 @@ enum StarColor {
   blue,
   red,
   white,
-  yellow,
+  yellow;
+
+  @override
+  String toString() => name.titleCase;
+
 }
 
 enum GalaxyType {
   irregular,
   spiral,
-  ring,
+  ring;
+
+  @override
+  String toString() => name.titleCase;
 }
 
 // AU stands for "Astronomical Unit/s"

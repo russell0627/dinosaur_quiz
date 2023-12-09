@@ -2,21 +2,21 @@ import 'package:recase/recase.dart';
 
 class Dinosaur {
   final String name;
-  final Group group;
+  final Suborder suborder;
   final Diet diet;
   final TimePeriod timePeriod;
   final String imageFileName;
 
   const Dinosaur({
     required this.name,
-    required this.group,
+    required this.suborder,
     required this.diet,
     required this.timePeriod,
     required this.imageFileName,
   });
 }
 
-enum Group {
+enum Suborder {
   ankylosaur,
   ceratopsian,
   hadrosaur,

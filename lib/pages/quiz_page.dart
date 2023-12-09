@@ -9,9 +9,9 @@ import '../models/question.dart';
 import '../models/space_object.dart';
 import '../utils/screen_utils.dart';
 import '../widgets/dialogs/game_finished_dialog.dart';
-import '../widgets/dialogs/question_display.dart';
 import '../widgets/dialogs/reset_game_dialog.dart';
 import '../widgets/logo_display.dart';
+import '../widgets/question_display.dart';
 import 'home.dart';
 
 //168 Different Questions, 3 per Dinosaur.
@@ -20,27 +20,25 @@ class QuizPage extends StatefulWidget {
   final QuestionType questionType;
   final int quizLength;
 
-  const QuizPage({Key? key, required this.quizLength, required this.questionType}) : super(key: key);
+  const QuizPage({super.key, required this.quizLength, required this.questionType});
 
   @override
   State<QuizPage> createState() => _QuizPageState();
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Question> questions = [];
-  int score = 0;
-  int questionIndex = 0;
-  String imagePath = "";
-  bool gameEndDialogShown = false;
+  List<Question> _questions = [];
+  int _score = 0;
+  int _questionIndex = 0;
+  bool _gameEndDialogShown = false;
 
-  bool get isQuizCompleted => questionIndex >= questions.length;
+  bool get isQuizCompleted => _questionIndex >= _questions.length;
 
-  String get getImagePath => widget.questionType == QuestionType.dinosaur ? dinosaurImagePath : spaceImagePath;
+  String get imagePath => widget.questionType == QuestionType.dinosaur ? dinosaurImagePath : spaceImagePath;
 
   @override
   void initState() {
     super.initState();
-    imagePath = getImagePath;
     resetQuestions();
   }
 
@@ -68,9 +66,14 @@ class _QuizPageState extends State<QuizPage> {
               icon: const Icon(Icons.refresh))
         ],
       ),
+
+      //
       body: DecoratedBox(
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage("${imagePath}herd_of_plesiosaurs.png"), fit: BoxFit.cover),
+          image: DecorationImage(
+              image: AssetImage(
+                  '$imagePath${widget.questionType == QuestionType.dinosaur ? "herd_of_plesiosaurs.png" : "blue_and_purple_planet.png"}'),
+              fit: BoxFit.cover),
         ),
         child: Center(
           child: Column(
@@ -78,12 +81,12 @@ class _QuizPageState extends State<QuizPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Score: $score",
+                "Score: $_score",
                 style: const TextStyle(fontSize: 16, fontFamily: "erasaur"),
               ),
               if (!isQuizCompleted) ...[
                 Text(
-                  "Question: ${questionIndex + 1}/${widget.quizLength}",
+                  "Question: ${_questionIndex + 1}/${widget.quizLength}",
                   style: const TextStyle(
                     fontSize: 16,
                     fontFamily: "Merienda",
@@ -101,15 +104,19 @@ class _QuizPageState extends State<QuizPage> {
                     ),
                     child: Padding(
                       padding: paddingAllM,
-                      child:
-                          Image.asset(questions[questionIndex].imageFilename ?? "${dinosaurImagePath}triceratops.jpg"),
+                      child: SizedBox(
+                        width: 200,
+                        height: 200,
+                        child: Image.asset(
+                            _questions[_questionIndex].imageFilename ?? "${dinosaurImagePath}triceratops.jpg"),
+                      ),
                     ),
                   ),
                 ),
                 Flexible(
                   child: QuestionDisplay(
-                    key: ObjectKey(questions[questionIndex]),
-                    question: questions[questionIndex],
+                    key: ObjectKey(_questions[_questionIndex]),
+                    question: _questions[_questionIndex],
                     onComplete: (answeredOnFirstTry) {
                       nextQuestion(answeredOnFirstTry);
                     },
@@ -130,22 +137,16 @@ class _QuizPageState extends State<QuizPage> {
 
     if (questionType == QuestionType.dinosaur) {
       newQuestions = [
-        const Question(
-          question: "Was Albertaceratops found in:",
-          options: ["Alberta, Canada", "Egypt", "India"],
-          answers: ["Alberta, Canada"],
-          imageFilename: "${dinosaurImagePath}albertaceratops.jpg",
-        ),
         Question<Diet>(
           question: "What was the diet classification for ${currentDinosaur!.name}?",
           options: Diet.values,
           answers: [currentDinosaur.diet],
           imageFilename: "$dinosaurImagePath${currentDinosaur.imageFileName}",
         ),
-        Question<Group>(
-          question: "What is the taxonomic family for ${currentDinosaur.name}?",
-          options: Group.values,
-          answers: [currentDinosaur.group],
+        Question<Suborder>(
+          question: "What is the lowest clade for ${currentDinosaur.name}?",
+          options: Suborder.values,
+          answers: [currentDinosaur.suborder],
           imageFilename: "$dinosaurImagePath${currentDinosaur.imageFileName}",
         ),
         Question<TimePeriod>(
@@ -157,21 +158,21 @@ class _QuizPageState extends State<QuizPage> {
       ];
     } else if (questionType == QuestionType.space) {
       newQuestions = [
-        const Question(
+        Question(
           question: "What is the hottest type of star?",
-          options: StarColor.values,
-          answers: [StarColor.blue],
+          options: StarColor.values.map((color) => color.toString()).toList(),
+          answers: [StarColor.blue.toString()],
         ),
-        const Question(
+        Question(
           question: "What is the coldest type of star?",
-          options: StarColor.values,
-          answers: [StarColor.red],
+          options: StarColor.values.map((color) => color.toString()).toList(),
+          answers: [StarColor.red.toString()],
         ),
-        const Question(
+        Question(
             question: "What type of galaxy is the Milky Way?",
-            options: GalaxyType.values,
-            answers: [GalaxyType.spiral],
-            imageFilename: "milky_way.png"),
+            options: GalaxyType.values.map((type) => type.toString()).toList(),
+            answers: [GalaxyType.spiral.toString()],
+            imageFilename: "${spaceImagePath}milky_way.png"),
         Question(question: "How far is the Sun from Earth?", options: auFormatter([1, 10, 15, 100]), answers: ["1 AU"]),
         const Question(
             question: "What is the biggest dwarf planet in the solar system?",
@@ -183,7 +184,12 @@ class _QuizPageState extends State<QuizPage> {
           auToMiles(1),
         ], answers: [
           auToMiles(1)
-        ])
+        ]),
+        const Question(
+          question: "What is at the center of the Milky Way Galaxy",
+          options: ["A Star", "Beans", "Black Hole", "Your Mother"],
+          answers: ["Black Hole"],
+        ),
       ];
     } else if (questionType == QuestionType.animal) {
       newQuestions = [
@@ -212,7 +218,7 @@ class _QuizPageState extends State<QuizPage> {
 
   void resetQuestions() {
     final List<Question> newQuestions = [];
-    questionIndex = 0;
+    _questionIndex = 0;
 
     switch (widget.questionType) {
       case QuestionType.dinosaur:
@@ -221,8 +227,21 @@ class _QuizPageState extends State<QuizPage> {
               _generateQuestions(currentDinosaur: dinosaurs.values.toList()[i], questionType: QuestionType.dinosaur));
         }
         newQuestions.shuffle();
-        score = 0;
-        questions = newQuestions.take(widget.quizLength).toList();
+        _score = 0;
+        newQuestions.add(
+          const Question(
+              question: "Was Albertaceratops found in:",
+              options: ["Alberta, Canada", "Egypt", "India"],
+              answers: ["Alberta, Canada"],
+              imageFilename: "${dinosaurImagePath}albertaceratops.jpg"),
+        );
+        newQuestions.add(
+          const Question(
+              question: "How many species did Triceratops have?",
+              options: ["2", "3", "4", "5",],
+              answers: ["2"],
+              imageFilename: "${dinosaurImagePath}albertaceratops.jpg"),
+        );
         setState(() {});
         break;
       case QuestionType.space:
@@ -230,30 +249,30 @@ class _QuizPageState extends State<QuizPage> {
         break;
       case QuestionType.animal:
         for (int i = 0; i < animals.values.length; i++) {
-          newQuestions.addAll(
-              _generateQuestions(currentAnimal: animals.values.toList()[i], questionType: QuestionType.dinosaur));
+          newQuestions
+              .addAll(_generateQuestions(currentAnimal: animals.values.toList()[i], questionType: QuestionType.animal));
         }
         break;
       case QuestionType.plant:
-        ;
         break;
     }
+    _questions = newQuestions.take(widget.quizLength).toList();
   }
 
   Future<void> nextQuestion(bool answeredOnFirstTry) async {
     setState(() {
       if (answeredOnFirstTry) {
-        score++;
+        _score++;
       }
 
-      questionIndex++;
+      _questionIndex++;
     });
 
     if (isQuizCompleted) {
       await showDialog(
         context: context,
         builder: (_) => GameFinishedDialog(
-          score: score,
+          score: _score,
           numberOfQuestions: widget.quizLength,
         ),
         barrierDismissible: false,
