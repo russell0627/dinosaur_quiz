@@ -42,7 +42,7 @@ class DinosaurDisplay extends StatelessWidget {
           style: infoTextStyle,
         ),
         Text(
-          "Family: ${dinosaur.suborder.name.titleCase}",
+          "Lowest Clade: ${dinosaur.suborder.name.titleCase}",
           style: infoTextStyle,
         ),
         Text(

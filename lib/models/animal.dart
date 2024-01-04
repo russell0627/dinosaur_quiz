@@ -18,7 +18,10 @@ enum AnimalCategory {
   reptile,
   amphibian,
   arachnid,
-  insect,
+  insect;
+
+  @override
+  String toString() => name;
 }
 
 enum AnimalHabitat {
@@ -35,7 +38,10 @@ enum AnimalHabitat {
   tundra,
   cave,
   undergroundWater,
-  humanHouse,
+  humanHouse;
+
+  @override
+  String toString() => name;
 }
 
 enum WaterType {

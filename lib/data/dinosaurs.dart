@@ -3,6 +3,13 @@ import '../models/dinosaur.dart';
 // There are 56 dinosaurs
 
 const Map<String, Dinosaur> dinosaurs = {
+  "aardonyx": Dinosaur(
+    name: "Aardonyx",
+    suborder: Suborder.sauropod,
+    diet: Diet.herbivore,
+    timePeriod: TimePeriod.jurassic,
+    imageFileName: "aardonyx.jpg",
+  ),
   "abelisaurus": Dinosaur(
     name: "Abelisaurus",
     suborder: Suborder.theropod,
@@ -10,6 +17,7 @@ const Map<String, Dinosaur> dinosaurs = {
     timePeriod: TimePeriod.cretaceous,
     imageFileName: "abelisaurus.jpg",
   ),
+  "achillobator" : Dinosaur(name:"Achillobator", suborder: Suborder.theropod, diet: Diet.carnivore, timePeriod: TimePeriod.cretaceous, imageFileName: "achillobator"),
   "achelosaurus": Dinosaur(
     name: "Achelosaurus",
     suborder: Suborder.theropod,

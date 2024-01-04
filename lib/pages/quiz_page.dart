@@ -15,6 +15,7 @@ import '../widgets/question_display.dart';
 import 'home.dart';
 
 //168 Different Questions, 3 per Dinosaur.
+const animalImagePath = "assets/images/animals/";
 
 class QuizPage extends StatefulWidget {
   final QuestionType questionType;
@@ -190,26 +191,27 @@ class _QuizPageState extends State<QuizPage> {
           options: ["A Star", "Beans", "Black Hole", "Your Mother"],
           answers: ["Black Hole"],
         ),
+        const Question(question: "How are black holes made", options: ["Dead Stars", "Dead Galaxies", "Dead Planets", "Divine Power"], answers: ["Dead Stars"]),
       ];
     } else if (questionType == QuestionType.animal) {
       newQuestions = [
-        Question<Diet>(
+        Question<String>(
           question: "What is the diet classification for ${currentAnimal!.name}?",
-          options: Diet.values,
-          answers: [currentAnimal.diet],
-          imageFilename: "$dinosaurImagePath${currentAnimal.imageFileName}",
+          options: Diet.values.map((diet) => diet.toString()).toList(),
+          answers: [currentAnimal.diet.toString()],
+          imageFilename: "$animalImagePath${currentAnimal.imageFileName}",
         ),
-        Question<AnimalCategory>(
+        Question<String>(
           question: "What is the category of animal for ${currentAnimal.name}?",
-          options: AnimalCategory.values,
-          answers: [currentAnimal.category],
-          imageFilename: "$dinosaurImagePath${currentAnimal.imageFileName}",
+          options: AnimalCategory.values.map((category) => category.toString()).toList(),
+          answers: [currentAnimal.category.toString()],
+          imageFilename: "$animalImagePath${currentAnimal.imageFileName}",
         ),
         Question(
           question: "Where does ${currentAnimal.name} live?",
-          options: AnimalHabitat.values,
-          answers: currentAnimal.habitats,
-          imageFilename: "$dinosaurImagePath${currentAnimal.imageFileName}",
+          options: AnimalHabitat.values.map((habitat) => habitat.toString()).toList(),
+          answers: currentAnimal.habitats.map((habitat) => habitat.toString()).toList(),
+          imageFilename: "$animalImagePath${currentAnimal.imageFileName}",
         )
       ];
     }
